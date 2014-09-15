@@ -8,3 +8,8 @@
 ;; use bar/foo, quux/foo instead.
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
+
+(set-background-color "#000000")
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
