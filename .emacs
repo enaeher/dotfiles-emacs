@@ -10,11 +10,14 @@
 (load "slime-wrapper")
 (load "paredit-wrapper")
 (load "highlight-sexp")
-(load "clipboard")
 (load "javascript")
 (load "css")
 (load "keybindings")
 (load "completion")
+
+(if (eq system-type 'darwin)
+    (load "macosx")
+    (load "clipboard"))
 
 (load "angularjs-mode/angular-html-mode")
 (load "angularjs-mode/angular-mode")
@@ -148,7 +151,7 @@ static char *gnus-pointer[] = {
  '(powerline-color2 "#333343")
  '(rainbow-identifiers-cie-l*a*b*-lightness 80)
  '(rainbow-identifiers-cie-l*a*b*-saturation 18)
- '(safe-local-variable-values (quote ((Package . imho-system) (package . rune-dom) (Package . net\.html\.generator) (pbook-heading-regexp . "^;;;\\(;+\\)") (pbook-commentary-regexp . "^;;;\\($\\|[^;]\\)") (package . odcl) (Package . wco-framework) (Package . HTML-TEMPLATE) (Package . wco-framework-utils) (Package . wco-system) (Package . wcof-tests) (Package . planq) (Package . cl-svg) (Lowercase . Yes) (indent-tabs) (show-trailing-whitespace . t) (Package . CHUNGA) (Package . CL-PPCRE) (Package . FLEXI-STREAMS) (package . puri) (Package . CL-WHO) (Package . CLOUCHDB) (Package . HUNCHENTOOT) (Package . CXML) (Syntax . Common-Lisp) (Package . SAX) (readtable . runes) (Encoding . utf-8) (Package . CLIM-INTERNALS) (Package . DREI-LISP-SYNTAX) (Package . DREI) (Package . CLIMACS-GUI) (Package . CLIMACS) (Package . XML) (Package . C) (Log . C\.Log) (Package . DRAKMA) (Package . webapp) (Syntax . COMMON-LISP) (Package . CL-USER) (Syntax . Lisp) (Package . Lisp) (Log . code\.log) (Package . LISP) (unibyte . t) (Package . odcl) (Package . Multiprocessing) (Package . CL) (Syntax . ANSI-Common-Lisp) (Package . webcheckout) (Package . imho) (Package . cl-user) (Package PCL (LISP WALKER)) (syntax . ansi-common-lisp) (base . 10) (package . wcof) (Package . PCL) (Syntax . Common-lisp) (Package . wcof) (Syntax . Ansi-Common-Lisp) (Base . 10) (Package . wco))))
+ '(safe-local-variable-values (quote ((ffip-project-file . "project.clj") (Package . imho-system) (package . rune-dom) (Package . net\.html\.generator) (pbook-heading-regexp . "^;;;\\(;+\\)") (pbook-commentary-regexp . "^;;;\\($\\|[^;]\\)") (package . odcl) (Package . wco-framework) (Package . HTML-TEMPLATE) (Package . wco-framework-utils) (Package . wco-system) (Package . wcof-tests) (Package . planq) (Package . cl-svg) (Lowercase . Yes) (indent-tabs) (show-trailing-whitespace . t) (Package . CHUNGA) (Package . CL-PPCRE) (Package . FLEXI-STREAMS) (package . puri) (Package . CL-WHO) (Package . CLOUCHDB) (Package . HUNCHENTOOT) (Package . CXML) (Syntax . Common-Lisp) (Package . SAX) (readtable . runes) (Encoding . utf-8) (Package . CLIM-INTERNALS) (Package . DREI-LISP-SYNTAX) (Package . DREI) (Package . CLIMACS-GUI) (Package . CLIMACS) (Package . XML) (Package . C) (Log . C\.Log) (Package . DRAKMA) (Package . webapp) (Syntax . COMMON-LISP) (Package . CL-USER) (Syntax . Lisp) (Package . Lisp) (Log . code\.log) (Package . LISP) (unibyte . t) (Package . odcl) (Package . Multiprocessing) (Package . CL) (Syntax . ANSI-Common-Lisp) (Package . webcheckout) (Package . imho) (Package . cl-user) (Package PCL (LISP WALKER)) (syntax . ansi-common-lisp) (base . 10) (package . wcof) (Package . PCL) (Syntax . Common-lisp) (Package . wcof) (Syntax . Ansi-Common-Lisp) (Base . 10) (Package . wco))))
  '(scss-sass-command "~/.gem/ruby/1.9.1/bin/sass")
  '(show-paren-mode t nil (paren))
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
@@ -174,4 +177,4 @@ static char *gnus-pointer[] = {
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#000000" :foreground "#eaeaea" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 150 :width normal :foundry "apple" :family "Inconsolata")))))
+ '(default ((t (:inherit nil :stipple nil :background "#000000" :foreground "#eaeaea" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 160 :width normal :foundry "apple" :family "Inconsolata")))))

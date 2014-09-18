@@ -13,11 +13,6 @@
 
 (define-key local-keys-map (kbd "C-x k") 'kill-this-buffer)
 
-;; key bindings
-(when (eq system-type 'darwin) ;; mac specific settings
-  (setq mac-option-modifier 'alt)
-  (setq mac-command-modifier 'meta))
-
 (define-minor-mode local-keys
     "A minor mode so that my key settings override major modes."
   t " local-keys" 'local-keys-map)
