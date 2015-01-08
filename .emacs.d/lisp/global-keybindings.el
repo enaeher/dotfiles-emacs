@@ -49,11 +49,6 @@
 
 (define-key local-keys-map (kbd "C-x 4") 'toggle-window-split)
 
-(define-key local-keys-map (kbd "C-c <right>") 'windmove-right)
-(define-key local-keys-map (kbd "C-c <left>") 'windmove-left)
-(define-key local-keys-map (kbd "C-c <down>") 'windmove-down)
-(define-key local-keys-map (kbd "C-c <up>") 'windmove-up)
-
 (define-minor-mode local-keys
     "A minor mode so that my key settings override major modes."
   t " local-keys" 'local-keys-map)

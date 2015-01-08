@@ -1,5 +1,3 @@
-(menu-bar-mode -1)
-(xterm-mouse-mode t)
 (global-set-key [mouse-4] '(lambda ()
                             (interactive)
                             (scroll-down 1)))
