@@ -2,11 +2,8 @@
 
 (defvar local-keys-map (make-keymap) "local-keys keymap.")
 
-(define-key local-keys-map (kbd "C-c g") 'magit-status)
 (define-key local-keys-map (kbd "C-c o") 'find-file-at-point)
-(define-key local-keys-map (kbd "M-x") 'smex)
 (define-key local-keys-map (kbd "C-o") 'other-window)
-(define-key local-keys-map (kbd "M-i") 'helm-swoop)
 
 (defun kill-this-buffer ()
   (interactive)

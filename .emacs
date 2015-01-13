@@ -44,6 +44,14 @@
   :mode "\\.js\\'"
   :init (setq js-indent-level 4))
 
+(use-package magit
+  :ensure t
+  :bind ("C-c g" . magit-status))
+
+(use-package smex
+  :ensure t
+  :bind ("M-x" . smex))
+
 (use-package tern
   :load-path "~/.emacs.d/lisp/tern/emacs"
   :init
@@ -80,6 +88,10 @@
         ('darwin "mdfind %s %s")
         (t "locate %s")))))
 
+(use-package helm-swoop
+  :ensure t
+  :bind ("M-i" . helm-swoop))
+
 (use-package multiple-cursors
   :ensure t
   :bind (("C-c ." . mc/mark-next-like-this)
@@ -87,6 +99,29 @@
 	 ("C-c /" . mc/mark-all-like-this)))
 
 (use-package dired-x)
+
+(use-package tramp
+  :init
+  (progn
+    ;; Show remote hostname in 
+    (defconst my-mode-line-buffer-identification
+      (list
+       '(:eval
+	 (when (file-remote-p default-directory 'host)
+	   (format "%s: " (file-remote-p default-directory 'host))))
+       "%12b"))
+
+    (setq-default
+     mode-line-buffer-identification
+     my-mode-line-buffer-identification)
+
+    (add-hook
+     'dired-mode-hook
+     (lambda ()
+       (setq
+	mode-line-buffer-identification
+	my-mode-line-buffer-identification)))))
+    
 
 ;;; END OF EDITABLE CONFIGURATION
 
@@ -144,6 +179,7 @@ static char *note[] = {
 \"#######...\",
 \"######....\",
 \"#######..#\" };")))
+ '(explicit-shell-file-name "/bin/bash")
  '(fci-rule-character-color "#192028")
  '(fci-rule-color "#c7c7c7")
  '(flx-ido-mode t)
@@ -207,7 +243,7 @@ static char *gnus-pointer[] = {
  '(ido-use-faces nil)
  '(ido-use-filename-at-point (quote guess))
  '(ido-vertical-mode t)
- '(js-indent-level 2 t)
+ '(js-indent-level 2)
  '(js2-basic-offset 2)
  '(linum-format " %6d ")
  '(magit-diff-use-overlays nil)
@@ -291,6 +327,8 @@ static char *gnus-pointer[] = {
  '(savehist-mode t)
  '(scroll-bar-mode nil)
  '(scss-sass-command "~/.gem/ruby/1.9.1/bin/sass")
+ '(shell-file-name "/bin/bash")
+ '(shift-select-mode nil)
  '(show-paren-mode t nil (paren))
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
  '(sml/active-background-color "#34495e")
