@@ -74,6 +74,11 @@
   :ensure t
   :diminish eldoc-mode)
 
+(use-package aggressive-indent
+  :ensure t
+  ;; binding conflicts with Cider, is pointless anyway
+  :init (define-key aggressive-indent-mode-map (kbd "C-c C-q") nil))
+
 (use-package helm
   :ensure t
   :diminish helm-mode
