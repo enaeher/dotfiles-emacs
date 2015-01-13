@@ -79,6 +79,15 @@
   ;; binding conflicts with Cider, is pointless anyway
   :init (define-key aggressive-indent-mode-map (kbd "C-c C-q") nil))
 
+(use-package ibuffer
+  :bind ("C-x C-b" . ibuffer))
+
+(use-package ibuffer-tramp
+  :init (add-hook 'ibuffer-hook
+		  (lambda ()
+		    (ibuffer-tramp-set-filter-groups-by-tramp-connection)
+		    (ibuffer-do-sort-by-alphabetic))))
+
 (use-package helm
   :ensure t
   :diminish helm-mode
