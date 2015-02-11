@@ -100,7 +100,10 @@
         ('berkeley-unix "locate -i %s")
         ('windows-nt "es %s")
         ('darwin "mdfind %s %s")
-        (t "locate %s")))))
+        (t "locate %s")))
+    ;; necessary until https://github.com/emacs-helm/helm/issues/867 is fixed
+    (add-hook 'helm-mode-hook (lambda ()
+				(fset 'helm-mode--in-file-completion-p (lambda (target candidate) nil))))))
 
 (use-package helm-swoop
   :ensure t
