@@ -32,3 +32,7 @@
 (use-package flycheck
   :ensure t
   :init (flycheck-clojure-setup))
+
+(use-package rainbow-delimiters
+    :ensure t
+    :init (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode))

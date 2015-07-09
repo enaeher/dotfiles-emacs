@@ -282,6 +282,7 @@ static char *gnus-pointer[] = {
  '(projectile-project-root-files-bottom-up
    (quote
     ("project.clj" ".projectile" ".git" ".hg" ".fslckout" ".bzr" "_darcs")))
+ '(rainbow-delimiters-max-face-count 1)
  '(rainbow-identifiers-cie-l*a*b*-lightness 80)
  '(rainbow-identifiers-cie-l*a*b*-saturation 18)
  '(safe-local-variable-values
@@ -417,6 +418,7 @@ static char *gnus-pointer[] = {
  ;; If there is more than one, they won't work right.
  '(default ((t (:background nil))))
  '(hl-sexp-face ((t (:background "color-235" :weight bold))))
+ '(rainbow-delimiters-depth-1-face ((t (:foreground "brightwhite"))))
  '(vertical-border ((t (:background nil)))))
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
