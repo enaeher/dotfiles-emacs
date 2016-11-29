@@ -158,6 +158,12 @@
 
 (use-package mu4e)
 
+(use-package robe
+  :ensure t
+  :init (progn
+          (add-hook 'ruby-mode-hook 'robe-mode)
+          (push 'company-robe company-backends)))
+
 ;;; END OF EDITABLE CONFIGURATION
 
 (custom-set-variables
@@ -179,7 +185,7 @@
  '(cider-repl-use-pretty-printing t)
  '(cljr-favor-prefix-notation nil)
  '(cljr-project-clean-functions (quote (cljr-remove-unused-requires cljr-sort-ns)))
- '(clojure-defun-indents (quote (fact facts future-fact future-facts)))
+ '(clojure-defun-indents (quote (fact facts future-fact future-facts variant)))
  '(column-number-mode t)
  '(company-begin-commands (quote (self-insert-command)))
  '(company-tooltip-limit 20)
@@ -289,9 +295,9 @@ static char *gnus-pointer[] = {
  '(ido-vertical-define-keys (quote C-n-C-p-up-down-left-right))
  '(ido-vertical-mode t)
  '(indent-tabs-mode nil)
- '(js-indent-level 2)
+ '(js-indent-level 2 t)
  '(js2-basic-offset 2)
- '(linum-format " %6d ")
+ '(linum-format " %3d ")
  '(magit-diff-use-overlays nil)
  '(magit-use-overlays nil)
  '(main-line-color1 "#222232")
@@ -309,6 +315,9 @@ static char *gnus-pointer[] = {
  '(mu4e-user-mail-address-list (quote ("enaeher@gmail.com" "eli@naeher.name")))
  '(org-babel-load-languages (quote ((lisp . t) (emacs-lisp . t))))
  '(org-src-fontify-natively t)
+ '(package-selected-packages
+   (quote
+    (robe ethan-wspace yard-mode yaml-mode web-mode use-package undo-tree tern tagedit sublime-themes subatomic256-theme soothe-theme solarized-theme smex slime rspec-mode rinari rich-minority rainbow-delimiters pivotal-tracker pbcopy org-present names moe-theme markdown-mode magit-popup magit json-reformat js2-mode ido-vertical-mode ibuffer-tramp ibuffer-projectile hl-sexp hideshowvis helm-swoop helm-projectile helm-mu helm-ag hc-zenburn-theme gruber-darker-theme git-timemachine flycheck-pos-tip flycheck-color-mode-line flycheck-clojure flx-ido f elisp-slime-nav distinguished-theme crosshairs company-go company-emoji color-theme-sanityinc-tomorrow clj-refactor cider-spy cider-profile cider-decompile chruby busybee-theme bubbleberry-theme birds-of-paradise-plus-theme beacon base16-theme auto-complete auctex anti-zenburn-theme ample-theme aggressive-indent ag afternoon-theme)))
  '(pivotal-api-token "3a12708b2d368bd4028501f65412f4ef")
  '(projectile-global-mode t)
  '(projectile-project-root-files-bottom-up
@@ -317,6 +326,7 @@ static char *gnus-pointer[] = {
  '(rainbow-delimiters-max-face-count 1)
  '(rainbow-identifiers-cie-l*a*b*-lightness 80)
  '(rainbow-identifiers-cie-l*a*b*-saturation 18)
+ '(rspec-use-spring-when-possible nil)
  '(ruby-align-chained-calls t)
  '(safe-local-variable-values
    (quote
