@@ -10,6 +10,7 @@
 (require 'use-package)
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
+(add-to-list 'load-path "~/.emacs.d/lisp/burdock-mode")
 
 (setq ring-bell-function 'ignore)
 
@@ -54,6 +55,10 @@
   :bind ("C-c g" . magit-status)
   :diminish magit-auto-revert-mode)
 
+(use-package magit-gh-pulls
+  :ensure t
+  :init (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls))
+
 (use-package smex
   :ensure t
   :bind ("M-x" . smex))
@@ -91,10 +96,10 @@
 
 (use-package ibuffer-projectile
    :init (add-hook 'ibuffer-hook
-                  (lambda ()
-                    (ibuffer-projectile-set-filter-groups)
-                    (unless (eq ibuffer-sorting-mode 'alphabetic)
-                      (ibuffer-do-sort-by-alphabetic)))))
+	       (lambda ()
+		 (ibuffer-projectile-set-filter-groups)
+		 (unless (eq ibuffer-sorting-mode 'alphabetic)
+		   (ibuffer-do-sort-by-alphabetic)))))
 
 (use-package helm
   :ensure t
@@ -103,11 +108,11 @@
     (require 'helm-config)
     (setq helm-c-locate-command
       (cl-case system-type
-        ('gnu/linux "locate -i -r %s")
-        ('berkeley-unix "locate -i %s")
-        ('windows-nt "es %s")
-        ('darwin "mdfind %s %s")
-        (t "locate %s")))))
+     ('gnu/linux "locate -i -r %s")
+     ('berkeley-unix "locate -i %s")
+     ('windows-nt "es %s")
+     ('darwin "mdfind %s %s")
+     (t "locate %s")))))
 
 (use-package helm-swoop
   :ensure t
@@ -115,14 +120,15 @@
 
 (use-package helm-projectile
   :ensure t
-  :bind (("C-c p s s" . helm-projectile-ag)
-         ("C-c p s g" . helm-projectile-grep)))
+  :bind (("C-c p h" . helm-projectile)
+      ("C-c p s s" . helm-projectile-ag)
+      ("C-c p s g" . helm-projectile-grep)))
 
 (use-package multiple-cursors
   :ensure t
   :bind (("C-c ." . mc/mark-next-like-this)
-         ("C-c ," . mc/mark-prev-like-this)
-         ("C-c /" . mc/mark-all-like-this)))
+      ("C-c ," . mc/mark-prev-like-this)
+      ("C-c /" . mc/mark-all-like-this)))
 
 (use-package dired-x)
 
@@ -133,8 +139,8 @@
     (defconst my-mode-line-buffer-identification
       (list
        '(:eval
-         (when (file-remote-p default-directory 'host)
-           (format "%s: " (file-remote-p default-directory 'host))))
+      (when (file-remote-p default-directory 'host)
+	(format "%s: " (file-remote-p default-directory 'host))))
        "%12b"))
 
     (setq-default
@@ -145,8 +151,8 @@
      'dired-mode-hook
      (lambda ()
        (setq
-        mode-line-buffer-identification
-        my-mode-line-buffer-identification)))))
+     mode-line-buffer-identification
+     my-mode-line-buffer-identification)))))
 
 (use-package undo-tree
   :ensure t
@@ -161,8 +167,17 @@
 (use-package robe
   :ensure t
   :init (progn
-          (add-hook 'ruby-mode-hook 'robe-mode)
-          (push 'company-robe company-backends)))
+       (add-hook 'ruby-mode-hook 'robe-mode)
+       (push 'company-robe company-backends)))
+
+(use-package inf-ruby
+  :ensure t)
+
+(use-package burdock-mode
+  :init (progn
+       (setq burdock-ruby-source-directory "/Users/eli/.emacs.d/lisp/burdock-mode/ruby/")
+       (add-hook 'ruby-mode-hook 'burdock-mode)
+       (add-hook 'burdock-mode-hook 'burdock-start)))
 
 ;;; END OF EDITABLE CONFIGURATION
 
@@ -185,7 +200,7 @@
  '(cider-repl-use-pretty-printing t)
  '(cljr-favor-prefix-notation nil)
  '(cljr-project-clean-functions (quote (cljr-remove-unused-requires cljr-sort-ns)))
- '(clojure-defun-indents (quote (fact facts future-fact future-facts variant)))
+ '(clojure-defun-indents (quote (fact facts future-fact future-facts variant fdef)))
  '(column-number-mode t)
  '(company-begin-commands (quote (self-insert-command)))
  '(company-tooltip-limit 20)
@@ -317,7 +332,7 @@ static char *gnus-pointer[] = {
  '(org-src-fontify-natively t)
  '(package-selected-packages
    (quote
-    (robe ethan-wspace yard-mode yaml-mode web-mode use-package undo-tree tern tagedit sublime-themes subatomic256-theme soothe-theme solarized-theme smex slime rspec-mode rinari rich-minority rainbow-delimiters pivotal-tracker pbcopy org-present names moe-theme markdown-mode magit-popup magit json-reformat js2-mode ido-vertical-mode ibuffer-tramp ibuffer-projectile hl-sexp hideshowvis helm-swoop helm-projectile helm-mu helm-ag hc-zenburn-theme gruber-darker-theme git-timemachine flycheck-pos-tip flycheck-color-mode-line flycheck-clojure flx-ido f elisp-slime-nav distinguished-theme crosshairs company-go company-emoji color-theme-sanityinc-tomorrow clj-refactor cider-spy cider-profile cider-decompile chruby busybee-theme bubbleberry-theme birds-of-paradise-plus-theme beacon base16-theme auto-complete auctex anti-zenburn-theme ample-theme aggressive-indent ag afternoon-theme)))
+    (clj-refactor restclient-helm burdock-mode inf-ruby evil multi-web-mode magit-gh-pulls sayid robe ethan-wspace yard-mode yaml-mode web-mode use-package undo-tree tern tagedit sublime-themes subatomic256-theme soothe-theme solarized-theme smex slime rspec-mode rinari rich-minority rainbow-delimiters pivotal-tracker pbcopy org-present names moe-theme markdown-mode magit-popup json-reformat js2-mode ido-vertical-mode ibuffer-tramp ibuffer-projectile hl-sexp hideshowvis helm-swoop helm-projectile helm-mu helm-ag hc-zenburn-theme gruber-darker-theme git-timemachine flycheck-pos-tip flycheck-color-mode-line flycheck-clojure flx-ido f elisp-slime-nav distinguished-theme crosshairs company-go company-emoji color-theme-sanityinc-tomorrow cider-spy cider-profile cider-decompile chruby busybee-theme bubbleberry-theme birds-of-paradise-plus-theme beacon base16-theme auto-complete auctex anti-zenburn-theme ample-theme aggressive-indent ag afternoon-theme)))
  '(pivotal-api-token "3a12708b2d368bd4028501f65412f4ef")
  '(projectile-global-mode t)
  '(projectile-project-root-files-bottom-up
@@ -327,14 +342,26 @@ static char *gnus-pointer[] = {
  '(rainbow-identifiers-cie-l*a*b*-lightness 80)
  '(rainbow-identifiers-cie-l*a*b*-saturation 18)
  '(rspec-use-spring-when-possible nil)
- '(ruby-align-chained-calls t)
+ '(ruby-align-chained-calls nil)
  '(safe-local-variable-values
    (quote
-    ((eval ignore-errors
-           (require
-            (quote whitespace))
-           (whitespace-mode 0)
-           (whitespace-mode 1))
+    ((eval put-clojure-indent
+	   (quote optional-field)
+	   (quote defun))
+     (eval put-clojure-indent
+	   (quote field)
+	   (quote defun))
+     (eval put-clojure-indent
+	   (quote variant)
+	   (quote defun))
+     (eval put-clojure-indent
+	   (quote alias)
+	   1)
+     (eval ignore-errors
+	   (require
+	    (quote whitespace))
+	   (whitespace-mode 0)
+	   (whitespace-mode 1))
      (clojure-test-ns-segment-position . 1)
      (whitespace-line-column)
      (ffip-project-file . "project.clj")
@@ -391,7 +418,7 @@ static char *gnus-pointer[] = {
      (Package . imho)
      (Package . cl-user)
      (Package PCL
-              (LISP WALKER))
+	      (LISP WALKER))
      (syntax . ansi-common-lisp)
      (base . 10)
      (package . wcof)
