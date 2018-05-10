@@ -20,7 +20,6 @@
       `((".*" ,temporary-file-directory t)))
 
 (add-hook 'after-init-hook 'server-start)
-(add-hook 'before-save-hook 'whitespace-cleanup)
 
 (load "aesthetic")
 (load "mouse-config")
@@ -70,6 +69,15 @@
 ;;     (add-hook 'js2-mode-hook (lambda () (tern-mode t)))
 ;;     (add-hook 'js-mode-hook 'flymake-mode)))
 
+(use-package ws-butler
+  :ensure t)
+
+(use-package flycheck-joker
+  :ensure t)
+
+(use-package flycheck-pos-tip
+  :ensure t)
+
 (use-package windmove
   :init (windmove-default-keybindings))
 
@@ -96,10 +104,10 @@
 
 (use-package ibuffer-projectile
    :init (add-hook 'ibuffer-hook
-	       (lambda ()
-		 (ibuffer-projectile-set-filter-groups)
-		 (unless (eq ibuffer-sorting-mode 'alphabetic)
-		   (ibuffer-do-sort-by-alphabetic)))))
+               (lambda ()
+                 (ibuffer-projectile-set-filter-groups)
+                 (unless (eq ibuffer-sorting-mode 'alphabetic)
+                   (ibuffer-do-sort-by-alphabetic)))))
 
 (use-package helm
   :ensure t
@@ -124,12 +132,6 @@
       ("C-c p s s" . helm-projectile-ag)
       ("C-c p s g" . helm-projectile-grep)))
 
-(use-package multiple-cursors
-  :ensure t
-  :bind (("C-c ." . mc/mark-next-like-this)
-      ("C-c ," . mc/mark-prev-like-this)
-      ("C-c /" . mc/mark-all-like-this)))
-
 (use-package dired-x)
 
 (use-package tramp
@@ -140,7 +142,7 @@
       (list
        '(:eval
       (when (file-remote-p default-directory 'host)
-	(format "%s: " (file-remote-p default-directory 'host))))
+        (format "%s: " (file-remote-p default-directory 'host))))
        "%12b"))
 
     (setq-default
@@ -195,9 +197,11 @@
  '(beacon-blink-delay 0)
  '(browse-url-browser-function (quote eww-browse-url))
  '(case-fold-search t)
+ '(cider-eldoc-display-context-dependent-info t)
  '(cider-prompt-for-symbol nil)
  '(cider-repl-history-file "~/.nrepl-history.eld")
  '(cider-repl-use-pretty-printing t)
+ '(cider-stacktrace-fill-column 80)
  '(cljr-favor-prefix-notation nil)
  '(cljr-project-clean-functions (quote (cljr-remove-unused-requires cljr-sort-ns)))
  '(clojure-defun-indents (quote (fact facts future-fact future-facts variant fdef)))
@@ -258,6 +262,7 @@ static char *note[] = {
  '(global-rudel-header-subscriptions-mode t)
  '(global-rudel-mode-line-publish-state-mode t)
  '(global-undo-tree-mode t)
+ '(global-whitespace-mode t)
  '(gnus-logo-colors (quote ("#0d7b72" "#adadad")) t)
  '(gnus-mode-line-image-cache
    (quote
@@ -311,7 +316,6 @@ static char *gnus-pointer[] = {
  '(ido-vertical-mode t)
  '(indent-tabs-mode nil)
  '(js-indent-level 2 t)
- '(js2-basic-offset 2)
  '(linum-format " %3d ")
  '(magit-diff-use-overlays nil)
  '(magit-use-overlays nil)
@@ -332,7 +336,7 @@ static char *gnus-pointer[] = {
  '(org-src-fontify-natively t)
  '(package-selected-packages
    (quote
-    (clj-refactor restclient-helm burdock-mode inf-ruby evil multi-web-mode magit-gh-pulls sayid robe ethan-wspace yard-mode yaml-mode web-mode use-package undo-tree tern tagedit sublime-themes subatomic256-theme soothe-theme solarized-theme smex slime rspec-mode rinari rich-minority rainbow-delimiters pivotal-tracker pbcopy org-present names moe-theme markdown-mode magit-popup json-reformat js2-mode ido-vertical-mode ibuffer-tramp ibuffer-projectile hl-sexp hideshowvis helm-swoop helm-projectile helm-mu helm-ag hc-zenburn-theme gruber-darker-theme git-timemachine flycheck-pos-tip flycheck-color-mode-line flycheck-clojure flx-ido f elisp-slime-nav distinguished-theme crosshairs company-go company-emoji color-theme-sanityinc-tomorrow cider-spy cider-profile cider-decompile chruby busybee-theme bubbleberry-theme birds-of-paradise-plus-theme beacon base16-theme auto-complete auctex anti-zenburn-theme ample-theme aggressive-indent ag afternoon-theme)))
+    (clj-refactor 0blayout csv-mode wordnut flycheck-joker ws-butler restclient-helm burdock-mode inf-ruby evil multi-web-mode magit-gh-pulls robe ethan-wspace yard-mode yaml-mode web-mode use-package undo-tree tern tagedit sublime-themes subatomic256-theme soothe-theme solarized-theme smex slime rspec-mode rinari rich-minority rainbow-delimiters pivotal-tracker pbcopy org-present names moe-theme markdown-mode magit-popup json-reformat js2-mode ido-vertical-mode ibuffer-tramp ibuffer-projectile hl-sexp hideshowvis helm-swoop helm-projectile helm-mu helm-ag hc-zenburn-theme gruber-darker-theme git-timemachine flycheck-pos-tip flycheck-color-mode-line flx-ido f elisp-slime-nav distinguished-theme crosshairs company-go company-emoji color-theme-sanityinc-tomorrow cider-profile cider-decompile chruby busybee-theme bubbleberry-theme birds-of-paradise-plus-theme beacon base16-theme auto-complete auctex anti-zenburn-theme ample-theme aggressive-indent ag afternoon-theme)))
  '(pivotal-api-token "3a12708b2d368bd4028501f65412f4ef")
  '(projectile-global-mode t)
  '(projectile-project-root-files-bottom-up
@@ -346,22 +350,22 @@ static char *gnus-pointer[] = {
  '(safe-local-variable-values
    (quote
     ((eval put-clojure-indent
-	   (quote optional-field)
-	   (quote defun))
+           (quote optional-field)
+           (quote defun))
      (eval put-clojure-indent
-	   (quote field)
-	   (quote defun))
+           (quote field)
+           (quote defun))
      (eval put-clojure-indent
-	   (quote variant)
-	   (quote defun))
+           (quote variant)
+           (quote defun))
      (eval put-clojure-indent
-	   (quote alias)
-	   1)
+           (quote alias)
+           1)
      (eval ignore-errors
-	   (require
-	    (quote whitespace))
-	   (whitespace-mode 0)
-	   (whitespace-mode 1))
+           (require
+            (quote whitespace))
+           (whitespace-mode 0)
+           (whitespace-mode 1))
      (clojure-test-ns-segment-position . 1)
      (whitespace-line-column)
      (ffip-project-file . "project.clj")
@@ -418,7 +422,7 @@ static char *gnus-pointer[] = {
      (Package . imho)
      (Package . cl-user)
      (Package PCL
-	      (LISP WALKER))
+              (LISP WALKER))
      (syntax . ansi-common-lisp)
      (base . 10)
      (package . wcof)
@@ -496,6 +500,8 @@ static char *gnus-pointer[] = {
  '(whitespace-style
    (quote
     (face tabs trailing space-before-tab indentation empty space-after-tab lines-tail)))
+ '(ws-butler-global-mode t)
+ '(ws-butler-keep-whitespace-before-point nil)
  '(xterm-mouse-mode t))
 ;(custom-set-faces
  ;; custom-set-faces was added by Custom.
