@@ -157,22 +157,22 @@ static char *gnus-pointer[] = {
  '(safe-local-variable-values
    (quote
     ((eval put-clojure-indent
-      (quote optional-field)
-      (quote defun))
+           (quote optional-field)
+           (quote defun))
      (eval put-clojure-indent
-      (quote field)
-      (quote defun))
+           (quote field)
+           (quote defun))
      (eval put-clojure-indent
-      (quote variant)
-      (quote defun))
+           (quote variant)
+           (quote defun))
      (eval put-clojure-indent
-      (quote alias)
-      1)
+           (quote alias)
+           1)
      (eval ignore-errors
-      (require
-       (quote whitespace))
-      (whitespace-mode 0)
-      (whitespace-mode 1))
+           (require
+            (quote whitespace))
+           (whitespace-mode 0)
+           (whitespace-mode 1))
      (clojure-test-ns-segment-position . 1)
      (whitespace-line-column)
      (ffip-project-file . "project.clj")
@@ -229,7 +229,7 @@ static char *gnus-pointer[] = {
      (Package . imho)
      (Package . cl-user)
      (Package PCL
-      (LISP WALKER))
+              (LISP WALKER))
      (syntax . ansi-common-lisp)
      (base . 10)
      (package . wcof)
