@@ -102,7 +102,10 @@
 (use-package counsel
   :ensure t
   :config (counsel-mode 1)
-  :bind ("M-x" . counsel-M-x))
+  :bind
+  ("M-x" . counsel-M-x)
+  ("C-c f" . counsel-git)
+  ("C-c k" . counsel-git-grep))
 
 (use-package counsel-projectile
   :ensure t
