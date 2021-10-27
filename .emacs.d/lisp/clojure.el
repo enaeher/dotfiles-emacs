@@ -15,12 +15,12 @@
 	  (add-hook 'clojure-mode-hook (lambda () (paredit-mode 1)))
 	  (add-hook 'cider-repl-mode-hook (lambda () (paredit-mode 1)))))
 
-(use-package clj-refactor
-  :ensure t
-  :init (add-hook 'clojure-mode-hook (lambda ()
-				       (clj-refactor-mode 1)
-                                       (yas-minor-mode 1)
-				       (cljr-add-keybindings-with-prefix "C-c C-m"))))
+;; (use-package clj-refactor
+;;   :ensure t
+;;   :init (add-hook 'clojure-mode-hook (lambda ()
+;; 				       (clj-refactor-mode 1)
+;;                                        (yas-minor-mode 1)
+;; 				       (cljr-add-keybindings-with-prefix "C-c C-m"))))
 
 (use-package cider
   :ensure t
@@ -29,3 +29,11 @@
 (use-package rainbow-delimiters
     :ensure t
     :init (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode))
+
+(defun tc/rename-buffer-to-ns ()
+  (interactive)
+  (let ((ns (clojure-expected-ns)))
+    (when (not (string= "" ns))
+      (rename-buffer ns))))
+
+(add-hook 'clojure-mode-hook 'tc/rename-buffer-to-ns)

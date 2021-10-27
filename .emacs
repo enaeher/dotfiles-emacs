@@ -103,6 +103,7 @@
   :ensure t
   :config (counsel-mode 1)
   :bind
+  ("M-i" . counsel-imenu)
   ("M-x" . counsel-M-x)
   ("C-c f" . counsel-git)
   ("C-c k" . counsel-git-grep))
@@ -145,4 +146,14 @@
   :ensure t
   :mode ("\\.erb\\'" . web-mode))
 
+(use-package distinguished-theme
+  :init (enable-theme 'distinguished)
+  :ensure t)
+
 (load custom-file :noerror)
+
+(use-package shortcut-backend
+  :load-path "~/shortcut/backend/elisp"
+  :if (file-exists-p "~/shortcut/backend/elisp")
+  :hook (clojure-mode . shortcut-backend-font-lock)
+  :bind (("C-c C-r" . shortcut-backend-goto-defresource)))
