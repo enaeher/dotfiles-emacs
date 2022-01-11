@@ -139,7 +139,7 @@ static char *gnus-pointer[] = {
  '(org-babel-load-languages '((lisp . t) (emacs-lisp . t)))
  '(org-src-fontify-natively t)
  '(package-selected-packages
-   '(distinguished-theme ws-butler web-mode use-package undo-tree slime rainbow-delimiters pbcopy ibuffer-vc forge flycheck-pos-tip flycheck-joker diminish counsel-projectile company-emoji aggressive-indent))
+   '(yaml-mode sibilant-mode git-link typescript-mode git-timemachine distinguished-theme ws-butler web-mode use-package undo-tree slime rainbow-delimiters pbcopy ibuffer-vc forge flycheck-pos-tip flycheck-joker diminish counsel-projectile company-emoji))
  '(pivotal-api-token "3a12708b2d368bd4028501f65412f4ef")
  '(projectile-global-mode t)
  '(projectile-project-root-files-bottom-up
@@ -253,6 +253,7 @@ static char *gnus-pointer[] = {
  '(syslog-warn-face
    '((t :background unspecified :foreground "#FF8C00" :weight bold)))
  '(tool-bar-mode nil)
+ '(typescript-indent-level 2)
  '(user-mail-address "eli@naeher.name")
  '(vc-annotate-background nil)
  '(vc-annotate-color-map

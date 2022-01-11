@@ -69,11 +69,6 @@
   :ensure t
   :diminish eldoc-mode)
 
-(use-package aggressive-indent
-  :ensure t
-  ;; binding conflicts with Cider, is pointless anyway
-  :config (define-key aggressive-indent-mode-map (kbd "C-c C-q") nil))
-
 (use-package ibuffer
   :bind ("C-x C-b" . ibuffer))
 
@@ -153,7 +148,9 @@
 (load custom-file :noerror)
 
 (use-package shortcut-backend
-  :load-path "~/shortcut/backend/elisp"
-  :if (file-exists-p "~/shortcut/backend/elisp")
+  :load-path "~/shortcut/backend/tools/elisp"
+  :if (file-exists-p "~/shortcut/backend/tools/elisp")
   :hook (clojure-mode . shortcut-backend-font-lock)
-  :bind (("C-c C-r" . shortcut-backend-goto-defresource)))
+  :bind (("C-c C-r" . shortcut-backend-goto-defresource)
+         ("C-c a" . shortcut-backend-insert-co-authored-by)
+         ("C-c l" . shortcut-backend-insert-shortcut-story-url)))
