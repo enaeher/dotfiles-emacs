@@ -1,13 +1,8 @@
 (use-package clojure-mode
-    :ensure t
-    :init (progn
-	    (add-hook 'clojure-mode-hook 'turn-on-eldoc-mode)))
-	    
-
-(use-package aggressive-indent
   :ensure t
-  :init (add-hook 'clojure-mode-hook (lambda ()
-				       (aggressive-indent-mode 1))))
+  :config (require 'flycheck-clj-kondo)
+  :init (progn
+	  (add-hook 'clojure-mode-hook 'turn-on-eldoc-mode)))
 
 (use-package paredit
   :ensure t
@@ -15,25 +10,25 @@
 	  (add-hook 'clojure-mode-hook (lambda () (paredit-mode 1)))
 	  (add-hook 'cider-repl-mode-hook (lambda () (paredit-mode 1)))))
 
-;; (use-package clj-refactor
-;;   :ensure t
-;;   :init (add-hook 'clojure-mode-hook (lambda ()
-;; 				       (clj-refactor-mode 1)
-;;                                        (yas-minor-mode 1)
-;; 				       (cljr-add-keybindings-with-prefix "C-c C-m"))))
-
 (use-package cider
   :ensure t
   :init (add-hook 'cider-repl-mode-hook (lambda () (local-set-key (kbd "C-c M-o") #'cider-repl-clear-buffer))))
 
 (use-package rainbow-delimiters
-    :ensure t
-    :init (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode))
+  :ensure t
+  :init (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode))
 
-(defun tc/rename-buffer-to-ns ()
+(use-package macrostep-geiser
+  :ensure t
+  :after cider-mode
+  :config (add-hook 'cider-mode-hook #'macrostep-geiser-setup)
+  :bind (("C-c e" . macrostep-expand)))
+
+(defun rename-buffer-to-ns ()
   (interactive)
-  (let ((ns (clojure-expected-ns)))
-    (when (not (string= "" ns))
-      (rename-buffer ns))))
+  (when (buffer-file-name)
+    (let ((ns (clojure-find-ns)))
+      (when (and ns (not (string= "" ns)))
+        (rename-buffer ns)))))
 
-(add-hook 'clojure-mode-hook 'tc/rename-buffer-to-ns)
+(add-hook 'clojure-mode-hook 'rename-buffer-to-ns)

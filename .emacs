@@ -3,9 +3,9 @@
   '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize)
 
-;; for homebrew
-(let ((default-directory "/usr/local/share/emacs/site-lisp/"))
-  (normal-top-level-add-subdirs-to-load-path))
+;; ;; for homebrew
+;; (let ((default-directory "/usr/local/share/emacs/site-lisp/"))
+;;   (normal-top-level-add-subdirs-to-load-path))
 
 (require 'use-package)
 
@@ -57,6 +57,9 @@
 (use-package flycheck-pos-tip
   :ensure t)
 
+(use-package flycheck-clj-kondo
+  :ensure t)
+
 (use-package windmove
   :init (windmove-default-keybindings))
 
@@ -92,7 +95,8 @@
                   ivy-count-format "%d/%d "))
   :bind
   ("C-s" . swiper)
-  ("C-x b" . ivy-switch-buffer))
+  ("C-x b" . ivy-switch-buffer)
+  ("M-s" . ivy-restrict-to-matches))
 
 (use-package counsel
   :ensure t
@@ -142,7 +146,6 @@
   :mode ("\\.erb\\'" . web-mode))
 
 (use-package distinguished-theme
-  :init (enable-theme 'distinguished)
   :ensure t)
 
 (load custom-file :noerror)
@@ -153,4 +156,9 @@
   :hook (clojure-mode . shortcut-backend-font-lock)
   :bind (("C-c C-r" . shortcut-backend-goto-defresource)
          ("C-c a" . shortcut-backend-insert-co-authored-by)
-         ("C-c l" . shortcut-backend-insert-shortcut-story-url)))
+         ("C-c l" . shortcut-backend-insert-shortcut-story-url))
+  :config (shortcut-backend-enable-matcher-combinator-test-output-colors))
+
+(use-package expand-region
+  :ensure t
+  :bind (("M-="  . er/expand-region)))
