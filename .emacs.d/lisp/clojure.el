@@ -2,7 +2,8 @@
   :ensure t
   :config (require 'flycheck-clj-kondo)
   :init (progn
-	  (add-hook 'clojure-mode-hook 'turn-on-eldoc-mode)))
+	  (add-hook 'clojure-mode-hook 'turn-on-eldoc-mode)
+          (add-hook 'clojure-mode-hook 'flycheck-mode)))
 
 (use-package paredit
   :ensure t
