@@ -20,8 +20,11 @@
 
 (setq custom-file "~/.emacs.d/custom.el")
 
+(setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
+
 (add-hook 'after-init-hook 'server-start)
 
+(load "distinguished-theme")
 (load "aesthetic")
 (load "mouse-config")
 (load "global-keybindings")
@@ -144,9 +147,6 @@
 (use-package web-mode
   :ensure t
   :mode ("\\.erb\\'" . web-mode))
-
-(use-package distinguished-theme
-  :ensure t)
 
 (load custom-file :noerror)
 
